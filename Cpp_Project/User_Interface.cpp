@@ -1,4 +1,4 @@
-// User_Interface.cpp
+﻿// User_Interface.cpp
 #include "Realize.hpp"
 #include <conio.h>
 #include <cstdlib>
@@ -6,39 +6,31 @@
 using namespace std;
 
 // 选项合法性校验（是否）
-bool selected()
-{
+bool selected() {
     char choice = '\0';
-    do
-    {
+    do {
         choice = _getch();
     } while (choice != 'Y' && choice != 'y' && choice != 'n' && choice != 'N');
-    if (choice == 'Y' || choice == 'y')
-    {
+    if (choice == 'Y' || choice == 'y') {
         cout << "图形模式：有向" << endl;
         return true;
-    }
-    else
-    {
+    } else {
         cout << "图形模式：无向" << endl;
         return false;
     }
 }
 
 // 选项合法性校验（选项）
-char selected(const char _min, const char _max)
-{
+char selected(const char _min, const char _max) {
     char choice = '\0';
-    do
-    {
+    do {
         choice = _getch();
     } while (choice < _min || choice > _max);
     return choice;
 };
 
 // 用户主菜单
-void graphicsInterface()
-{
+void graphicsInterface() {
     cout << "                欢迎使用通用图论研究工具                 " << endl;
     cout << "＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊" << endl;
     cout << "                   1.从键入生成无权图                   " << endl;
@@ -54,16 +46,13 @@ void graphicsInterface()
 }
 
 // 主函数
-int main()
-{
+int main() {
     // 图论对象
     Graph *graph = nullptr;
-    while (true)
-    {
+    while (true) {
         system("cls");
         graphicsInterface();
-        switch (selected('1', '8'))
-        {
+        switch (selected('1', '8')) {
         case '1':
         {
             system("cls");
@@ -83,12 +72,9 @@ int main()
         case '2':
         {
             system("cls");
-            if (graph != nullptr)
-            {
+            if (graph != nullptr) {
                 graph->showGraph();
-            }
-            else
-            {
+            } else {
                 cerr << "错误：未建立图相关数据！请先通过键盘输入或文件导入图数据......" << endl;
             }
             Sleep(3000);
@@ -97,8 +83,7 @@ int main()
         case '3':
         {
             system("cls");
-            if (graph != nullptr)
-            {
+            if (graph != nullptr) {
                 cout << "请输入顶点编号：" << ends;
                 int vertexID;
                 cin >> vertexID;
@@ -109,8 +94,7 @@ int main()
                 cout << "               3.出度               " << endl;
                 cout << "＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊" << endl;
                 cout << "（请选择以上功能，非法按键将被忽略）" << endl;
-                switch (selected('1', '3'))
-                {
+                switch (selected('1', '3')) {
                 case '1':
                     cout << "总度数：" << graph->getDegree(vertexID, Graph::all);
                     break;
@@ -121,9 +105,7 @@ int main()
                     cout << "出度：" << graph->getDegree(vertexID, Graph::out);
                     break;
                 }
-            }
-            else
-            {
+            } else {
                 cerr << "错误：未建立图相关数据！请先通过键盘输入或文件导入图数据......" << endl;
             }
             Sleep(3000);
@@ -132,15 +114,12 @@ int main()
         case '4':
         {
             system("cls");
-            if (graph != nullptr)
-            {
+            if (graph != nullptr) {
                 cout << "请输入起始顶点编号：" << ends;
                 int vertexID;
                 cin >> vertexID;
                 graph->deepFirstTraverse(vertexID);
-            }
-            else
-            {
+            } else {
                 cerr << "错误：未建立图相关数据！请先通过键盘输入或文件导入图数据......" << endl;
             }
             Sleep(3000);
@@ -149,13 +128,10 @@ int main()
         case '5':
         {
             system("cls");
-            if (graph != nullptr)
-            {
+            if (graph != nullptr) {
                 cout << "其中一条哈密顿路径为：" << endl;
                 graph->hamitonPath();
-            }
-            else
-            {
+            } else {
                 cerr << "错误：未建立图相关数据！请先通过键盘输入或文件导入图数据......" << endl;
             }
             Sleep(3000);
@@ -164,15 +140,12 @@ int main()
         case '6':
         {
             system("cls");
-            if (graph != nullptr)
-            {
+            if (graph != nullptr) {
                 cout << "将文件另存为：" << endl;
                 string filePath;
                 cin >> filePath;
                 graph->saveAs(filePath);
-            }
-            else
-            {
+            } else {
                 cerr << "错误：未建立图相关数据！请先通过键盘输入或文件导入图数据......" << endl;
             }
             Sleep(3000);
@@ -185,8 +158,7 @@ int main()
             string filePath;
             cin >> filePath;
             // 如果存在已经被打开的图，则关闭（释放）图对象
-            if (graph != nullptr)
-            {
+            if (graph != nullptr) {
                 delete graph;
                 // 图指针置空
                 graph = nullptr;
@@ -194,8 +166,7 @@ int main()
             // 导入数据
             graph = new Graph(filePath);
             // 判断图是否被成功创建（不论导入成功与否，图指针必不为空）
-            if (!graph->isCorrectlyInited)
-            {
+            if (!graph->isCorrectlyInited) {
                 // 图没有被正确创建（打开），其他功能仍无法正常使用，
                 // 所以还需要关闭（释放）错误的图对象，让菜单屏蔽相应功能
                 delete graph;

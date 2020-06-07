@@ -1,16 +1,15 @@
-// Definition.hpp
+﻿// Definition.hpp
 #pragma once
-#include <iostream>
+#include <deque>
 #include <fstream>
-#include <stack>
-using namespace std;
+#include <iostream>
+#include <string>
 
 // 最大顶点数量
 constexpr int MAX_VERTEX = 9;
 
-class Graph
-{
-  private:
+class Graph {
+private:
     // 图的类型
     bool isDirectional;
     // 邻接矩阵
@@ -26,11 +25,11 @@ class Graph
     // 重置节点访问记录（内核）
     void _rv();
     // 遍历路径
-    stack<int> pathStack;
+    std::deque<int> pathStack;
     // 深度优先搜索（内核）
     void _dfs(const int);
 
-  public:
+public:
     // 记录对象是否被正确初始化
     bool isCorrectlyInited;
     // 度的类型
@@ -52,7 +51,7 @@ class Graph
     // 哈密顿路径
     void hamitonPath();
     // 另存为
-    void saveAs(const string);
+    void saveAs(const std::string);
     // 打开
-    Graph(const string);
+    Graph(const std::string);
 };
