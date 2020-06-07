@@ -395,5 +395,6 @@ MigrationBackup/
 FodyWeavers.xsd
 ################################################################################
 
-############################## Microsoft Office ##############################
+############ Secret Files (They may be uploaded to GitHub Releases) ############
 *.docx
+*.pdf
